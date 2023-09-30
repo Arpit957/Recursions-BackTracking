@@ -1,0 +1,45 @@
+class Solution{
+  void helper(vector<vector<int>> &temp , int n, vector<string> &ans , string p , int r , int c)
+    {
+        if(temp[r][c] == 0 ) {
+            return;
+        }
+        
+        if(r == n-1 && c == n-1 ){
+            ans.push_back(p);
+            return;
+        }
+        
+        
+        
+        temp[r][c] = 0;
+        
+        if(r < n-1){
+            helper(temp,n,ans,p + 'D' ,r+1, c);
+        }
+        
+        if(c < n-1){
+            helper(temp,n,ans,p + 'R' ,r, c+1);
+        }
+        
+        if(r > 0){
+            helper(temp,n,ans,p + 'U' , r-1,c);
+        }
+        
+        if(c > 0){
+            helper(temp,n,ans,p + 'L' , r,c-1);
+        }
+        
+        
+        temp[r][c] = 1;
+        
+    }
+    public:
+    
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        
+        vector<string> ans;
+        helper(m,n,ans,"",0,0);
+        return ans;
+    }
+};
